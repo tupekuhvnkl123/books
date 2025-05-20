@@ -1,9 +1,6 @@
 .container {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  padding: 50px 0 50px 0;
 }
 
 .loginText {
@@ -12,8 +9,9 @@
   font-size: 14px;
   font-weight: 400;
   a {
-    color: white;
-    margin-right: 5px;
+    color: rgb(0, 0, 0);
+    margin-left: 5px;
+    font-weight: 500;
   }
 }
 
@@ -26,18 +24,9 @@
   margin: auto auto 25px auto;
   row-gap: 15px;
 
-  .policyText {
-    margin-top: -6px;
-    font-size: 12px;
-    color: white;
-    a {
-      color: #118df0;
-    }
-  }
-
   button {
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: rgb(0, 0, 0);
     height: 40px;
     display: flex;
     align-items: center;
@@ -54,11 +43,12 @@
     font-size: 11px;
     width: 100%;
     margin-top: -12px;
+    margin-left: 15px;
   }
 }
 .inputContainer {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 100px;
   display: flex;
   height: 40px;
@@ -71,12 +61,12 @@
     background-color: transparent;
     outline: none;
     border: none;
-    color: white;
+    color: black;
     font-size: 13px;
     font-weight: 400;
   }
 
   input::placeholder {
-    color: white;
+    color: rgba(0, 0, 0, 0.7);
   }
 }

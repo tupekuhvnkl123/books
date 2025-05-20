@@ -23,8 +23,8 @@ const Register = () => {
         isPending={isPending}
       />
       <p className={S.loginText}>
-        משתמש קיים?
-        <Link to={"/auth/login"}>התחבר כאן</Link>
+        Already have an account?
+        <Link to={"/auth/login"}>Login Here</Link>
       </p>
     </section>
   );

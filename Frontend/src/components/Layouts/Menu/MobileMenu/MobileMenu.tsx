@@ -1,19 +1,19 @@
-import S from "./Menu.module.scss";
+import S from "./MobileMenu.module.scss";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthCtx } from "../../../context/AuthCtx";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthCtx } from "../../../../context/AuthCtx";
 import { IoIosLogOut } from "react-icons/io";
 import { IoIosLogIn } from "react-icons/io";
 import { RiMenu3Fill } from "react-icons/ri";
-import { menuItems } from "./menu-items";
+import { menuItems } from "../menu-items";
+import MenuItem from "../MenuItem";
+import PermissionGate from "../../../HOC/PermissionGate";
 
-const Menu = () => {
+const MobileMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const { isAuthenticated, logout, user } = useContext(AuthCtx);
+  const { isAuthenticated, logout } = useContext(AuthCtx);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const userIsntAdmin = !isAuthenticated || user?.role !== "admin";
 
   const closeMenu = () => setShowMenu(false);
   const openMenu = () => setShowMenu(true);
@@ -21,10 +21,10 @@ const Menu = () => {
   const handleAuthButton = () => {
     if (isAuthenticated) {
       logout();
+      setShowMenu(false);
     } else {
       navigate("/auth/login");
     }
-    setShowMenu(false);
   };
 
   useEffect(() => {
@@ -40,25 +40,16 @@ const Menu = () => {
       {showMenu && (
         <>
           {/* Overlay */}
-          <div className={S.overlay} onClick={closeMenu}></div>
+          <div className={S.overlay} onClick={closeMenu} />
 
           {/* Sidebar */}
           <div className={S.sidebar}>
-            {menuItems.map(({ id, link, Icon, title, requiresAdmin }) => {
-              if (requiresAdmin && userIsntAdmin) return;
-              return (
-                <Link
-                  key={id}
-                  to={link}
-                  className={S.menuItem}
-                  onClick={closeMenu}
-                >
-                  <Icon />
-                  <span>{title}</span>
-                </Link>
-              );
-            })}
-            <button className={S.menuItem} onClick={handleAuthButton}>
+            {menuItems.map((item) => (
+              <PermissionGate key={item.id} roles={item.permissionRoles}>
+                <MenuItem item={item} closeMenu={closeMenu} />
+              </PermissionGate>
+            ))}
+            <button className={S.authBtn} onClick={handleAuthButton}>
               {isAuthenticated ? <IoIosLogOut /> : <IoIosLogIn />}
               <span>{isAuthenticated ? "Log Out" : "Log In"}</span>
             </button>
@@ -69,4 +60,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default MobileMenu;

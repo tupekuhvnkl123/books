@@ -7,7 +7,6 @@ import {
   validateUsername,
 } from "../../../utils/validations/auth.validation";
 import { ReactSVG } from "react-svg";
-import { Link } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 
 type FormErrors = {
@@ -62,7 +61,7 @@ const RegisterForm = ({ register, isPending }: RegisterFormProps) => {
         <input
           type="text"
           name="name"
-          placeholder="שם"
+          placeholder="Name"
           value={formData.name}
           onChange={handleChange}
         />
@@ -72,7 +71,7 @@ const RegisterForm = ({ register, isPending }: RegisterFormProps) => {
         <input
           type="text"
           name="username"
-          placeholder="שם משתמש"
+          placeholder="Username"
           value={formData.username}
           onChange={handleChange}
         />
@@ -82,7 +81,7 @@ const RegisterForm = ({ register, isPending }: RegisterFormProps) => {
         <input
           type={isPasswordVisible ? "text" : "password"}
           name="password"
-          placeholder="סיסמה"
+          placeholder="Password"
           value={formData.password}
           onChange={handleChange}
         />
@@ -92,11 +91,9 @@ const RegisterForm = ({ register, isPending }: RegisterFormProps) => {
         />
       </div>
       {errors.password && <span className={S.error}>{errors.password}</span>}
-      <span className={S.policyText}>
-        על ידי הרשמה אני מסכים <Link to={"/privacy-policy"}>למדיניות האתר</Link>
-      </span>
+
       <button type="submit" disabled={isPending}>
-        {isPending ? <PuffLoader color="#118DF0" size={25} /> : "הירשם"}
+        {isPending ? <PuffLoader color="#118DF0" size={25} /> : "Register"}
       </button>
     </form>
   );

@@ -5,6 +5,7 @@ import { PiCurrencyDollarSimple } from "react-icons/pi";
 
 type ProductItemProps = {
   data: BookPreviewType;
+  admin?: boolean;
 };
 
 const BookItem = ({ data }: ProductItemProps) => {

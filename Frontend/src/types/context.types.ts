@@ -1,6 +1,8 @@
+import { UserRole } from "./Users.types";
+
 export type UserCtxType = {
   id: string;
-  role: "admin" | "user";
+  role: UserRole;
 };
 
 export type AuthCtxType = {

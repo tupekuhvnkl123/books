@@ -5,7 +5,7 @@ import Masonry from "react-masonry-css";
 
 const skeletonArr = [0, 1, 2, 3, 4, 5];
 
-const SkeletonLoading = () => {
+const BooksLoading = () => {
   const breakpointColumnsObj = {
     default: 3,
     700: 2,
@@ -27,4 +27,4 @@ const SkeletonLoading = () => {
   );
 };
 
-export default SkeletonLoading;
+export default BooksLoading;

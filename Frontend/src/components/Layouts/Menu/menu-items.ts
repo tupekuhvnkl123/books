@@ -1,19 +1,20 @@
 import { GoHome } from "react-icons/go";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { BsShieldLock } from "react-icons/bs";
+import { UserRole } from "../../../types/Users.types";
 
 export const menuItems = [
   {
     id: "home",
     link: "/",
     Icon: GoHome,
-    title: "Home Page",
+    title: "Home",
   },
   {
     id: "purchased",
     link: "/purchased",
     Icon: IoPricetagsOutline,
-    title: "Purchased List",
+    title: "Purchased",
   },
   {
     id: "admin",
@@ -21,5 +22,6 @@ export const menuItems = [
     Icon: BsShieldLock,
     title: "Admin",
     requiresAdmin: true,
+    permissionRoles: [UserRole.ADMIN],
   },
 ];

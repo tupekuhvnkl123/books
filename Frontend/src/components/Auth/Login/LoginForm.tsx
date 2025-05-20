@@ -32,8 +32,12 @@ const LoginForm = ({ login, isPending }: LoginFormProps) => {
     e.preventDefault();
 
     const newErrors: FormErrors = {
-      username: !formData.username.trim().length ? "שדה זה הוא חובה" : "",
-      password: !formData.password.trim().length ? "שדה זה הוא חובה" : "",
+      username: !formData.username.trim().length
+        ? "This field is required"
+        : "",
+      password: !formData.password.trim().length
+        ? "This field is required"
+        : "",
     };
 
     setErrors(newErrors);
@@ -53,7 +57,7 @@ const LoginForm = ({ login, isPending }: LoginFormProps) => {
         <input
           type="text"
           name="username"
-          placeholder="שם משתמש"
+          placeholder="Username"
           value={formData.username}
           onChange={handleChange}
         />
@@ -63,7 +67,7 @@ const LoginForm = ({ login, isPending }: LoginFormProps) => {
         <input
           type={isPasswordVisible ? "text" : "password"}
           name="password"
-          placeholder="סיסמה"
+          placeholder="Password"
           value={formData.password}
           onChange={handleChange}
         />
@@ -74,7 +78,7 @@ const LoginForm = ({ login, isPending }: LoginFormProps) => {
       </div>
       {errors.password && <span className={S.error}>{errors.password}</span>}
       <button type="submit" disabled={isPending}>
-        {isPending ? <PuffLoader color="#118DF0" size={25} /> : "התחבר למשתמש"}
+        {isPending ? <PuffLoader color="#118DF0" size={25} /> : "Login"}
       </button>
     </form>
   );

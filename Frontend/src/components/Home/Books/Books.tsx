@@ -1,4 +1,4 @@
-import SkeletonLoading from "./SkeletonLoading";
+import BooksLoading from "./BooksLoading";
 import S from "./Books.module.scss";
 import Masonry from "react-masonry-css";
 import BookItem from "./BookItem";
@@ -17,12 +17,15 @@ const Books = ({ data, isLoading, admin }: BooksProps) => {
   };
 
   if (isLoading) {
-    return <SkeletonLoading />;
+    return <BooksLoading />;
   }
 
   return (
     <Masonry breakpointCols={breakpointColumnsObj} className={S.container}>
-      {data && data.map((book) => <BookItem key={book.id} data={book} />)}
+      {data &&
+        data.map((book) => (
+          <BookItem key={book.id} data={book} admin={admin} />
+        ))}
     </Masonry>
   );
 };
