@@ -5,9 +5,14 @@ export type UserType = {
   name: string;
 };
 
+export enum UserRole {
+  USER = "user",
+  ADMIN = "admin",
+}
+
 export type UserJwtPayload = JwtPayload & {
   user: {
     id: string;
-    role: "admin" | "user";
+    role: UserRole;
   };
 };

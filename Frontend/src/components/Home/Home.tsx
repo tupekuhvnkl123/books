@@ -7,7 +7,9 @@ import Popup from "../UI/Popup/Popup";
 import { getBooks } from "../../api/Books";
 import { getApiErr } from "../../utils/api-error";
 
-const Home = () => {
+type HomeProps = { admin?: boolean };
+
+const Home = ({ admin }: HomeProps) => {
   const [searchValue, setSearchValue] = useState("");
 
   const { isLoading, data, error, isError } = useQuery({
@@ -27,7 +29,7 @@ const Home = () => {
       <Search changeSearchValue={changeSearch} />
 
       {/* Results */}
-      <Books data={data} isLoading={isLoading} />
+      <Books data={data} isLoading={isLoading} admin={admin} />
     </section>
   );
 };

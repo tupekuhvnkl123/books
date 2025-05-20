@@ -7,9 +7,10 @@ import { BookPreviewType } from "../../../types/Books.types";
 type BooksProps = {
   data?: BookPreviewType[];
   isLoading: boolean;
+  admin?: boolean;
 };
 
-const Books = ({ data, isLoading }: BooksProps) => {
+const Books = ({ data, isLoading, admin }: BooksProps) => {
   const breakpointColumnsObj = {
     default: 3,
     700: 2,

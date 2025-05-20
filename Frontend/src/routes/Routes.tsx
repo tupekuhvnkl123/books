@@ -22,7 +22,13 @@ const Routes = () => {
         { path: "/purchased", element: <Purchased /> },
         { path: "/new-product/:id", element: <NewBook /> },
         { path: "/book/:id", element: <Book /> },
-
+        {
+          path: "/admin",
+          children: [
+            { index: true, element: <Home admin={true} /> },
+            { path: "new-product/:id?", element: <NewBook /> },
+          ],
+        },
         {
           path: "/auth",
           element: <Auth />,

@@ -9,15 +9,6 @@ const Auth = () => {
   const location = useLocation();
   const { isAuthenticated, authLoading } = useContext(AuthCtx);
 
-  const goBackHandler = () => {
-    navigate("/");
-    // if (window.history.length > 1) {
-    //   navigate(-1); // go back
-    // } else {
-    //   navigate("/"); // go home
-    // }
-  };
-
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
