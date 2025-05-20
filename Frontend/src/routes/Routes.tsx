@@ -9,7 +9,7 @@ import Register from "../components/Auth/Register/Register";
 import Auth from "../components/Auth/Auth";
 import Home from "../components/Home/Home";
 import Book from "../components/Book/Book";
-import NewBook from "../components/NewBook/NewBook";
+import NewBook from "../components/Admin/NewBook/NewBook";
 import Purchased from "../components/Purchased/Purchased";
 
 const Routes = () => {
@@ -20,13 +20,12 @@ const Routes = () => {
       children: [
         { path: "/", element: <Home /> },
         { path: "/purchased", element: <Purchased /> },
-        { path: "/new-product/:id", element: <NewBook /> },
         { path: "/book/:id", element: <Book /> },
         {
           path: "/admin",
           children: [
-            { index: true, element: <Home admin={true} /> },
-            { path: "new-product/:id?", element: <NewBook /> },
+            { index: true, element: <Navigate to="/" replace /> },
+            { path: "new-book/:id?", element: <NewBook /> },
           ],
         },
         {

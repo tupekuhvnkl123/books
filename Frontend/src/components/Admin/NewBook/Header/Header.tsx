@@ -4,7 +4,7 @@ import S from "./Header.module.scss";
 import { PuffLoader } from "react-spinners";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { AuthCtx } from "../../../context/AuthCtx";
+import { AuthCtx } from "../../../../context/AuthCtx";
 
 type HeaderProps = {
   name?: string;

@@ -1,6 +1,6 @@
 import S from "./NewBook.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthCtx } from "../../context/AuthCtx";
+import { AuthCtx } from "../../../context/AuthCtx";
 
 const NewBook = () => {
   const location = useLocation();

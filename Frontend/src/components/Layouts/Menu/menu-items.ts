@@ -1,7 +1,7 @@
 import { GoHome } from "react-icons/go";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { BsShieldLock } from "react-icons/bs";
 import { UserRole } from "../../../types/Users.types";
+import { LuBookPlus } from "react-icons/lu";
 
 export const menuItems = [
   {
@@ -17,10 +17,10 @@ export const menuItems = [
     title: "Purchased",
   },
   {
-    id: "admin",
-    link: "/admin",
-    Icon: BsShieldLock,
-    title: "Admin",
+    id: "new-book",
+    link: "/new-book",
+    Icon: LuBookPlus,
+    title: "New Book",
     requiresAdmin: true,
     permissionRoles: [UserRole.ADMIN],
   },
