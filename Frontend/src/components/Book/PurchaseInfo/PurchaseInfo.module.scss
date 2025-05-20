@@ -1,0 +1,37 @@
+@use "../../../global-styles/variables.scss" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 1px solid #f4f4f4;
+  padding: 15px 20px 20px 20px;
+  margin-top: auto;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  span {
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.buyButton {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  background-color: #118df0;
+}
+
+@media (min-width: $desktop-media-breakpoint) {
+  .container {
+    padding: 15px 20px 40px 20px;
+  }
+}

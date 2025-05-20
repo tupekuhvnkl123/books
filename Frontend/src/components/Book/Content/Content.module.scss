@@ -1,0 +1,70 @@
+@use "../../../global-styles/variables.scss" as *;
+
+.container {
+  z-index: 100;
+  background-color: white;
+  position: relative;
+  padding: 20px 20px 0 20px;
+}
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateY(-25%) translateX(-50%);
+  width: 120%;
+  height: 70px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  z-index: -1;
+}
+
+.title_price {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    color: $app-black-color;
+    font-size: 27px;
+    font-weight: 600;
+  }
+  span {
+    color: $app-black-color;
+    font-size: 23px;
+    font-weight: 500;
+  }
+
+  .priceContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+  }
+}
+
+.separateLine {
+  width: 100%;
+  background-color: #f4f4f4;
+  border: none;
+  height: 1.5px;
+  flex-shrink: 0;
+  margin: 25px 0;
+}
+
+.description {
+  color: $app-grey-color;
+  font-size: 14px;
+  line-height: 23px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: $desktop-media-breakpoint) {
+  .container::after {
+    display: none;
+  }
+
+  .description {
+    font-size: 16px;
+    line-height: 25px;
+  }
+}

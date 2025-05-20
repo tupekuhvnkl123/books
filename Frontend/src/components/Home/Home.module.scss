@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}

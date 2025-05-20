@@ -1,0 +1,13 @@
+.container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.backArrow {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  // transform: scale(0.8);
+  cursor: pointer;
+}

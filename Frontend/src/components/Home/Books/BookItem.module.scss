@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  margin-bottom: 25px;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-position: center;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    flex-shrink: 0;
+  }
+
+  .title {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 15px;
+    margin-top: 5px;
+  }
+
+  .price {
+    display: flex;
+    font-size: 15px;
+    color: black;
+    font-weight: 500;
+    column-gap: 5px;
+  }
+}

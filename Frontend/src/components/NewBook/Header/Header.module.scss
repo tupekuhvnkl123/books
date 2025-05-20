@@ -1,0 +1,56 @@
+@use "../../../global-styles/variables.scss" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    background-color: $app-blue-color;
+    border-radius: 25px;
+    height: 23px;
+    width: 70px;
+    border: none;
+    font-weight: 500;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  img {
+    width: 35px;
+    aspect-ratio: 1/1;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  span {
+    font-size: 13px;
+    font-weight: 500;
+    color: $app-black-color;
+  }
+  .imageSkeleton {
+    width: 35px;
+    aspect-ratio: 1/1;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  .titleSkeleton {
+    width: 50px;
+    height: 15px;
+  }
+}

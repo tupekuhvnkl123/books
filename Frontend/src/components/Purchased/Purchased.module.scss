@@ -1,0 +1,18 @@
+@use "../../global-styles/variables.scss" as *;
+
+.container {
+  padding: 30px 0 $navbar-height 0;
+  overflow-y: scroll;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.title {
+  color: black;
+  font-size: 25px;
+  text-align: center;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}

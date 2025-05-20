@@ -1,0 +1,17 @@
+@use "../../global-styles/variables.scss" as *;
+
+.container {
+  max-width: $max-app-width;
+  position: relative;
+  margin: auto;
+  height: 100dvh;
+  // overflow-x: hidden;
+  background-color: white;
+  // padding-bottom: $navbar-height;
+}
+
+@media (min-width: $desktop-media-breakpoint) {
+  .container {
+    padding-top: 50px;
+  }
+}
