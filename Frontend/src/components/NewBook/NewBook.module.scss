@@ -1,10 +1,8 @@
-@use "../../global-styles/variables.scss" as *;
-
 .container {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-  padding: 20px 20px calc($navbar-height + 20px) 20px;
+  padding: 20px;
   width: 100%;
   overflow-y: scroll;
   height: 100%;

@@ -1,9 +1,6 @@
-@use "../../../global-styles/variables.scss" as *;
-
 .container {
   width: 100%;
   padding: 0 20px;
-  margin-top: -15px;
 }
 
 .inputContainer {
@@ -11,7 +8,7 @@
   border-radius: 50px;
   display: flex;
   background-color: #f8f8f8;
-  height: 35px;
+  height: 45px;
   align-items: center;
   padding: 0 15px;
   input {
@@ -20,10 +17,10 @@
     border: none;
     width: 100%;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 15px;
   }
 
   input::placeholder {
-    color: $app-grey-color;
+    color: rgba(0, 0, 0, 0.7);
   }
 }

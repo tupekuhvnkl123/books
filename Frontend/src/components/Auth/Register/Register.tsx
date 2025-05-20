@@ -18,10 +18,6 @@ const Register = () => {
     <section className={S.container}>
       {isError && <Popup msg={getApiErr(error)} />}
 
-      <div className={S.logoContainer}>
-        <img src="/logo.svg" />
-        <h1>MarketSphere</h1>
-      </div>
       <RegisterForm
         register={(data: RegisterFormData) => mutate(data)}
         isPending={isPending}

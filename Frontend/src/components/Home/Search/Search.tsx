@@ -25,11 +25,11 @@ const Search = ({ changeSearchValue }: SearchProps) => {
       <div className={S.inputContainer}>
         <input
           type="text"
-          placeholder="חפש מוצר"
+          placeholder="Search Book"
           value={inputValue}
           onChange={({ target }) => setInputValue(target.value)}
         />
-        <IoIosSearch size={15} />
+        <IoIosSearch size={25} />
       </div>
     </div>
   );

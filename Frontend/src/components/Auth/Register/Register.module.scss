@@ -1,27 +1,9 @@
-@use "../../../global-styles/variables.scss" as *;
-
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: end;
   padding: 50px 0 50px 0;
-}
-
-.logoContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 5px;
-  margin-bottom: 100px;
-  img {
-    height: 100px;
-  }
-  h1 {
-    color: white;
-    font-weight: 400;
-  }
 }
 
 .loginText {
@@ -49,7 +31,7 @@
     font-size: 12px;
     color: white;
     a {
-      color: $app-blue-color;
+      color: #118df0;
     }
   }
 
@@ -68,7 +50,7 @@
   }
 
   .error {
-    color: $app-error-color;
+    color: red;
     font-size: 11px;
     width: 100%;
     margin-top: -12px;

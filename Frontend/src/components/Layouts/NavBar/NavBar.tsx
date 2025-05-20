@@ -21,7 +21,7 @@ const NavBar = () => {
             key={id}
             className={`${S.navItem} ${isActive && S.active}`}
           >
-            <Icon color={isActive ? "#118DF0" : "#B7B7B7"} size={24} />
+            <Icon color={isActive ? "#118DF0" : "#B7B7B7"} size={30} />
           </Link>
         );
       })}

@@ -1,11 +1,9 @@
-@use "../../../global-styles/variables.scss" as *;
-
 #nprogress {
   pointer-events: none;
 }
 
 #nprogress .bar {
-  background: $app-blue-color;
+  background: #118df0;
   height: 4px;
   position: fixed;
   top: 0;
@@ -15,7 +13,7 @@
 }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px $app-blue-color, 0 0 5px $app-blue-color;
+  box-shadow: 0 0 10px #118df0, 0 0 5px #118df0;
 }
 
 #nprogress .spinner {
