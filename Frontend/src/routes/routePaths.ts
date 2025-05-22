@@ -5,11 +5,11 @@ export const ROUTES = {
   BOOK: (id: string = ":id") => `/book/${id}`,
   ADMIN: {
     ROOT: "/admin",
-    NEW_BOOK: "new-book",
+    NEW_BOOK: "/admin/new-book",
   },
   AUTH: {
     ROOT: "/auth",
-    LOGIN: "login",
-    REGISTER: "register",
+    LOGIN: `/auth/login`,
+    REGISTER: "/auth/register",
   },
 };

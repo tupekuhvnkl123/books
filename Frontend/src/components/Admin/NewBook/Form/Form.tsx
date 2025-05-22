@@ -29,7 +29,7 @@ const Form = ({ updateBookData, errors, bookData }: FormProps) => {
         err={errors.price}
         inputProps={{
           name: "price",
-          value: bookData.title,
+          value: bookData.price,
           type: "number",
           onChange: (e) => updateBookData("price", e.target.value),
           placeholder: "Price",

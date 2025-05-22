@@ -5,6 +5,18 @@
   column-gap: 30px;
 }
 
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  p {
+    background-color: rgb(230, 230, 230);
+    padding: 15px;
+    border-radius: 5px;
+  }
+}
+
 .skeletonItem {
   display: flex;
   flex-direction: column;
@@ -16,9 +28,6 @@
   }
   .title {
     width: 70%;
-  }
-  .price {
-    // width: 40%;
   }
 
   &.differentItem {

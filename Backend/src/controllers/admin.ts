@@ -3,7 +3,6 @@ import User from "../models/user";
 import createHttpError from "http-errors";
 import { validationResult } from "express-validator";
 import { ReqAuth } from "../types/types";
-import { singleImageUpload } from "../services/cloudinary/actions";
 import { createMongoBook, updateMongoBook } from "../services/mongoose/books";
 import Book from "../models/book";
 

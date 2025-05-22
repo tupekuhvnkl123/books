@@ -12,7 +12,6 @@ const useAuthCtx = (): AuthCtxType => {
   const [user, setUser] = useState<UserCtxType | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
 
-  //! check
   const decodeAndSetUser = (token: string) => {
     const decoded = jwtDecode<UserJwtPayload>(token);
     const now = Date.now() / 1000;

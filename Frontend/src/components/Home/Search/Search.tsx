@@ -15,7 +15,7 @@ const Search = ({ changeSearchValue }: SearchProps) => {
       } else {
         changeSearchValue("");
       }
-    }, 700); // debounce
+    }, 500); // debounce
 
     return () => clearTimeout(timer);
   }, [inputValue]);

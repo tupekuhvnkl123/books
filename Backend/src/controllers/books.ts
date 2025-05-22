@@ -53,7 +53,6 @@ export const getPurchasedBooks = async (
 ) => {
   try {
     const userId = req.user?.userId;
-
     const user = await User.findById(userId);
 
     if (!user || !userId) {

@@ -13,7 +13,7 @@ export const singleImageUpload = async ({
 
   try {
     const uploadedImage = await cloudinary.uploader.upload(image, {
-      folder: `Books/${path}`,
+      folder: `BooksStore/${path}`,
     });
 
     return uploadedImage.secure_url;

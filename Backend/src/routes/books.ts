@@ -10,9 +10,10 @@ import {
 const router = express.Router();
 
 router.get("/", getBooks);
-router.get("/:bookId", getBook);
 
 router.get("/purchased", checkAuth as any, getPurchasedBooks as any);
+
+router.get("/:bookId", getBook);
 
 router.post("/:bookId/purchase", checkAuth as any, purchaseBook as any);
 

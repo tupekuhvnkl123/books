@@ -45,7 +45,9 @@ const Book = () => {
       {/* Book image */}
       <div className={S.imageContainer}>
         <img src={img} alt={"image"} />
-        <IoIosArrowBack className={S.returnButton} />
+        <Link to={ROUTES.HOME} className={S.returnButton}>
+          <IoIosArrowBack size={20} />
+        </Link>
       </div>
       {/* Main content of the book */}
       <Content title={title} price={price} description={description} />

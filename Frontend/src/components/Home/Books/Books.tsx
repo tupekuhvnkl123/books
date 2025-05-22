@@ -20,6 +20,14 @@ const Books = ({ data, isLoading, admin }: BooksProps) => {
     return <BooksLoading />;
   }
 
+  if (!data?.length) {
+    return (
+      <div className={S.empty}>
+        <p>Books list is empty</p>
+      </div>
+    );
+  }
+
   return (
     <Masonry breakpointCols={breakpointColumnsObj} className={S.container}>
       {data &&
