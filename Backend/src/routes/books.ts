@@ -8,13 +8,13 @@ import {
 } from "../controllers/books";
 
 const router = express.Router();
-
+//!
 router.get("/", getBooks);
+// @ts-expect-error
+router.get("/purchased", checkAuth, getPurchasedBooks);
 
-router.get("/purchased", checkAuth as any, getPurchasedBooks as any);
-
+// @ts-expect-error
+router.post("/:bookId/purchase", checkAuth, purchaseBook);
 router.get("/:bookId", getBook);
-
-router.post("/:bookId/purchase", checkAuth as any, purchaseBook as any);
 
 export default router;

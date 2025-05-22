@@ -28,7 +28,7 @@ const Purchased = () => {
     <div className={S.container}>
       {isError && <Popup error={error} />}
       <h1 className={S.title}>Purchased Books</h1>
-      <Books data={data} isLoading={isLoading} />
+      <Books data={data} isLoading={isLoading} purchasedPage />
     </div>
   );
 };

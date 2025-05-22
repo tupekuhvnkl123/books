@@ -37,7 +37,15 @@ const Book = () => {
     );
   }
 
-  const { img, title, description, price, author, publisher } = data;
+  const {
+    img,
+    title,
+    description,
+    price,
+    author,
+    publisher,
+    id: bookId,
+  } = data;
 
   return (
     <div className={S.container}>
@@ -51,7 +59,7 @@ const Book = () => {
       {/* Main content of the book */}
       <Content title={title} price={price} description={description} />
       {/* Purchase */}
-      <PurchaseInfo author={author} publisher={publisher} />
+      <PurchaseInfo author={author} publisher={publisher} bookId={bookId} />
     </div>
   );
 };

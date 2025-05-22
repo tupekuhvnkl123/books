@@ -8,13 +8,13 @@ import {
 } from "../utils/validations/book.validation";
 
 const router = express.Router();
-
-router.use(checkAuth as any, checkAdmin as any);
-
-router.post("/", validateBook, createBook as any);
-
-router.patch("/:bookId", validateBookUpdate, updateBook as any);
-
-router.delete("/:bookId", deleteBook as any);
+// @ts-expect-error
+router.use(checkAuth as any, checkAdmin);
+// @ts-expect-error
+router.post("/", validateBook, createBook);
+// @ts-expect-error
+router.patch("/:bookId", validateBookUpdate, updateBook);
+// @ts-expect-error
+router.delete("/:bookId", deleteBook);
 
 export default router;

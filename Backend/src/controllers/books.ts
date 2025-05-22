@@ -3,6 +3,7 @@ import createHttpError from "http-errors";
 import { ReqAuth } from "../types/types";
 import User from "../models/user";
 import Book from "../models/book";
+import { createCheckoutSession } from "../services/stripe/checkout";
 
 export const getBooks = async (
   req: Request,
@@ -53,7 +54,7 @@ export const getPurchasedBooks = async (
 ) => {
   try {
     const userId = req.user?.userId;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("purchased");
 
     if (!user || !userId) {
       throw createHttpError.NotFound("User not found");
@@ -71,7 +72,27 @@ export const purchaseBook = async (
   next: NextFunction
 ) => {
   try {
-    res.status(200).json({});
+    const userId = req.user?.userId;
+    const { bookId } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user || !userId) {
+      throw createHttpError.NotFound("User not found");
+    }
+
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      throw createHttpError.NotFound("Couldn't find book.");
+    }
+    const checkoutSession = await createCheckoutSession(book);
+
+    if (!user.purchased.includes(book._id)) {
+      user.purchased.push(book._id);
+      await user.save();
+    }
+
+    res.status(201).json({ checkoutUrl: checkoutSession.url });
   } catch (error) {
     next(error);
   }

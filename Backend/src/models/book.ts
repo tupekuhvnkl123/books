@@ -20,4 +20,5 @@ bookSchema.virtual("id").get(function () {
 
 const Book = model("Book", bookSchema);
 
+export { bookSchema };
 export default Book;

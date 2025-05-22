@@ -9,11 +9,11 @@ import { UserRole } from "../../../types/Users.types";
 
 type ProductItemProps = {
   data: BookPreviewType;
-  admin?: boolean;
   refetch?: () => void;
+  purchasedPage?: boolean;
 };
 
-const BookItem = ({ data, refetch }: ProductItemProps) => {
+const BookItem = ({ data, refetch, purchasedPage }: ProductItemProps) => {
   const { img, price, title, id } = data;
 
   return (
@@ -21,9 +21,11 @@ const BookItem = ({ data, refetch }: ProductItemProps) => {
       <div className={S.container}>
         <div className={S.imageContainer}>
           <img src={img} alt="image" />
-          <PermissionGate roles={[UserRole.ADMIN]}>
-            <BookActions bookId={id} refetch={refetch} />
-          </PermissionGate>
+          {!purchasedPage && (
+            <PermissionGate roles={[UserRole.ADMIN]}>
+              <BookActions bookId={id} refetch={refetch} />
+            </PermissionGate>
+          )}
         </div>
         <span className={S.title}>{title}</span>
         <div className={S.price}>

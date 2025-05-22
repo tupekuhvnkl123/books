@@ -28,7 +28,7 @@ const Popup = ({ msg, type = "error", error }: PopupProps) => {
 
   return (
     <div className={`${S.container} ${isClosing && S.closing}`}>
-      <p>{type ? getApiErr(error) : msg}</p>
+      <p>{type === "error" ? getApiErr(error) : msg}</p>
       <ReactSVG
         src="/icons/UI/close.svg"
         onClick={handleClose}

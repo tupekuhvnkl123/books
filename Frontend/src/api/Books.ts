@@ -27,6 +27,6 @@ export const getPurchasedBooks = async (): Promise<BookPreviewType[]> => {
 };
 
 export const purchaseBook = async (bookId: string) => {
-  const response = await axios.post(`/${bookId}/purchase`);
+  const response = await axios.post(`/books/${bookId}/purchase`);
   return response.data;
 };
