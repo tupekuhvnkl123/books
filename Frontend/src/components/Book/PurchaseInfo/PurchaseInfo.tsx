@@ -10,8 +10,8 @@ const PurchaseInfo = ({ author, publisher }: PurchaseInfoProps) => {
   return (
     <div className={S.container}>
       <div className={S.info}>
-        <span>נכתב על ידי {author}</span>|
-        <span>הוצא לאור על ידי {publisher}</span>
+        <span>author : {author}</span>
+        <span>publisher : {publisher}</span>
       </div>
       <button className={S.buyButton}>Buy</button>
     </div>

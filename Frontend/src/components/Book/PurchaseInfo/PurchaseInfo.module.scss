@@ -4,24 +4,25 @@
   justify-content: space-between;
   width: 100%;
   border-top: 1px solid #f4f4f4;
-  padding: 15px 20px 20px 20px;
+  padding: 20px;
   margin-top: auto;
 }
 
 .info {
   display: flex;
-  align-items: center;
   column-gap: 10px;
+  flex-direction: column;
   span {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
 .buyButton {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  padding: 8px 15px;
+  padding: 6px 20px;
   border: none;
   border-radius: 20px;
   color: white;
