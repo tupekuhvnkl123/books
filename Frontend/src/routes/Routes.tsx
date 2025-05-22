@@ -1,3 +1,4 @@
+// src/routes/Routes.tsx
 import {
   createBrowserRouter,
   Navigate,
@@ -11,30 +12,45 @@ import Home from "../components/Home/Home";
 import Book from "../components/Book/Book";
 import NewBook from "../components/Admin/NewBook/NewBook";
 import Purchased from "../components/Purchased/Purchased";
+import { ROUTES } from "./routePaths";
 
 const Routes = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: ROUTES.HOME,
       element: <AppElement />,
       children: [
-        { path: "/", element: <Home /> },
-        { path: "/purchased", element: <Purchased /> },
-        { path: "/book/:id", element: <Book /> },
+        { path: ROUTES.HOME, element: <Home /> },
+        { path: ROUTES.PURCHASED, element: <Purchased /> },
+        { path: ROUTES.BOOK(), element: <Book /> },
+
         {
-          path: "/admin",
+          path: ROUTES.ADMIN.ROOT,
           children: [
-            { index: true, element: <Navigate to="/" replace /> },
-            { path: "new-book", element: <NewBook /> },
+            { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
+            {
+              path: ROUTES.ADMIN.NEW_BOOK,
+              element: <NewBook />,
+            },
           ],
         },
+
         {
-          path: "/auth",
+          path: ROUTES.AUTH.ROOT,
           element: <Auth />,
           children: [
-            { index: true, element: <Navigate to="login" replace /> },
-            { path: "login", element: <Login /> },
-            { path: "register", element: <Register /> },
+            {
+              index: true,
+              element: <Navigate to={ROUTES.AUTH.LOGIN} replace />,
+            },
+            {
+              path: ROUTES.AUTH.LOGIN,
+              element: <Login />,
+            },
+            {
+              path: ROUTES.AUTH.REGISTER,
+              element: <Register />,
+            },
           ],
         },
       ],

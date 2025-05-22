@@ -9,6 +9,7 @@ import { createBook } from "../../../api/Admin";
 import Form from "./Form/Form";
 import useNewBookForm from "../../../hooks/useNewBookForm";
 import Image from "./Image/Image";
+import { ROUTES } from "../../../routes/routePaths";
 
 const NewBook = () => {
   const location = useLocation();
@@ -20,13 +21,13 @@ const NewBook = () => {
   const { isPending, mutate } = useMutation({
     mutationFn: createBook,
     onSuccess: () => {
-      navigate(`/`);
+      navigate(ROUTES.HOME);
     },
   });
 
   useEffect(() => {
     if (user?.role !== UserRole.ADMIN && !authLoading) {
-      navigate("/");
+      navigate(ROUTES.HOME);
     }
   }, [location, authLoading, user]);
 

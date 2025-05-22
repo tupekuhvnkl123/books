@@ -8,6 +8,7 @@ import { PuffLoader } from "react-spinners";
 import Popup from "../UI/Popup/Popup";
 import { getApiErr } from "../../utils/api-error";
 import { IoIosArrowBack } from "react-icons/io";
+import { ROUTES } from "../../routes/routePaths";
 
 const Book = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const Book = () => {
     return (
       <div className={S.loadingContainer}>
         <Popup msg={getApiErr(error)} />
-        <Link className={S.homeLink} to={"/"}>
+        <Link className={S.homeLink} to={ROUTES.HOME}>
           חזרה לדף הבית
         </Link>
       </div>

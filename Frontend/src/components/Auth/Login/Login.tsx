@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { LoginFormData, loginRequest } from "../../../api/Auth";
 import { getApiErr } from "../../../utils/api-error";
 import Popup from "../../UI/Popup/Popup";
+import { ROUTES } from "../../../routes/routePaths";
 
 const Login = () => {
   const { login } = useContext(AuthCtx);
@@ -27,7 +28,7 @@ const Login = () => {
       />
       <p className={S.registerText}>
         New Account?
-        <Link to={"/auth/register"}>Register Here</Link>
+        <Link to={ROUTES.AUTH.REGISTER}>Register Here</Link>
       </p>
     </section>
   );

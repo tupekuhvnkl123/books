@@ -3,6 +3,7 @@ import S from "./Auth.module.scss";
 import { useContext, useEffect } from "react";
 import { AuthCtx } from "../../context/AuthCtx";
 import { IoIosArrowBack } from "react-icons/io";
+import { ROUTES } from "../../routes/routePaths";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -11,13 +12,13 @@ const Auth = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate(ROUTES.HOME);
     }
   }, [location, authLoading]);
 
   return (
     <div className={S.container}>
-      <Link to={"/"} className={S.backArrow}>
+      <Link to={ROUTES.HOME} className={S.backArrow}>
         <IoIosArrowBack size={30} />
       </Link>
       <div className={S.logoContainer}>

@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { setSecureCookie } from "../utils/cookies";
 import { useNavigate } from "react-router-dom";
 import { UserJwtPayload } from "../types/Users.types";
+import { ROUTES } from "../routes/routePaths";
 
 const useAuthCtx = (): AuthCtxType => {
   const navigate = useNavigate();
@@ -23,14 +24,14 @@ const useAuthCtx = (): AuthCtxType => {
   const login = useCallback(({ accessToken }: { accessToken: string }) => {
     setSecureCookie({ name: "accessToken", value: accessToken, expires: 30 });
     decodeAndSetUser(accessToken);
-    navigate("/");
+    navigate(ROUTES.HOME);
   }, []);
 
   const logout = useCallback(() => {
     Cookies.remove("accessToken");
     setUser(null);
     setAuthLoading(false);
-    navigate("/");
+    navigate(ROUTES.HOME);
   }, []);
 
   useLayoutEffect(() => {

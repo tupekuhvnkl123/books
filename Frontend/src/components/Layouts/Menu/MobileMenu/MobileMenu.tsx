@@ -8,6 +8,7 @@ import { RiMenu3Fill } from "react-icons/ri";
 import { menuItems } from "../menu-items";
 import MenuItem from "../MenuItem";
 import PermissionGate from "../../../HOC/PermissionGate";
+import { ROUTES } from "../../../../routes/routePaths";
 
 const MobileMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -23,7 +24,7 @@ const MobileMenu = () => {
       logout();
       setShowMenu(false);
     } else {
-      navigate("/auth/login");
+      navigate(ROUTES.AUTH.LOGIN);
     }
   };
 

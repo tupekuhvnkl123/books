@@ -7,6 +7,7 @@ import { getPurchasedBooks } from "../../api/Books";
 import Popup from "../UI/Popup/Popup";
 import { getApiErr } from "../../utils/api-error";
 import Books from "../Home/Books/Books";
+import { ROUTES } from "../../routes/routePaths";
 
 const Purchased = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Purchased = () => {
 
   useEffect(() => {
     if (!isAuthenticated && !authLoading) {
-      navigate("/auth/login");
+      navigate(ROUTES.AUTH.LOGIN);
     }
   }, [location, authLoading]);
 
