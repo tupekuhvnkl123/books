@@ -4,10 +4,8 @@ import { AuthCtx } from "../../../context/AuthCtx";
 import { useContext, useEffect } from "react";
 import { UserRole } from "../../../types/Users.types";
 import { PuffLoader } from "react-spinners";
-import { useMutation } from "@tanstack/react-query";
-import { createBook } from "../../../api/Admin";
 import Form from "./Form/Form";
-import useNewBookForm from "../../../hooks/useNewBookForm";
+import useNewBook from "../../../hooks/useNewBook";
 import Image from "./Image/Image";
 import { ROUTES } from "../../../routes/routePaths";
 import Popup from "../../UI/Popup/Popup";
@@ -16,15 +14,18 @@ const NewBook = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { authLoading, user } = useContext(AuthCtx);
-  const { bookData, checkValidation, errors, updateBookData } =
-    useNewBookForm();
 
-  const { isPending, mutate, isError, error } = useMutation({
-    mutationFn: createBook,
-    onSuccess: () => {
-      navigate(ROUTES.HOME);
-    },
-  });
+  const {
+    bookData,
+    errors,
+    updateBookData,
+    editPreviewImg,
+    createBookHandler,
+    isEditMode,
+    isError,
+    isPending,
+    removeEditPreviewImg,
+  } = useNewBook();
 
   useEffect(() => {
     if (user?.role !== UserRole.ADMIN && !authLoading) {
@@ -32,23 +33,27 @@ const NewBook = () => {
     }
   }, [location, authLoading, user]);
 
-  const createBookHandler = () => {
-    const isValid = checkValidation();
-    if (!isValid) return;
-
-    mutate(bookData);
-  };
-
   return (
     <div className={S.container}>
-      {isError && <Popup error={error} />}
-      <button className={S.createButton} onClick={createBookHandler}>
-        {isPending ? <PuffLoader color="#fff" size={20} /> : "Create"}
+      {isError && <Popup />}
+      <button
+        className={S.createButton}
+        onClick={createBookHandler}
+        disabled={isPending}
+      >
+        {isPending ? (
+          <PuffLoader color="#fff" size={20} />
+        ) : isEditMode ? (
+          "Update"
+        ) : (
+          "Create"
+        )}
       </button>
       <Image
         err={errors.img}
         changeImage={(img?: string) => updateBookData("img", img)}
-        currentImage={bookData.img}
+        currentImage={bookData.img || editPreviewImg}
+        removeEditPreviewImg={removeEditPreviewImg}
       />
       <Form
         errors={errors}

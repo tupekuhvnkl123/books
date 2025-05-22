@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 0 0 15px 15px;
+  position: absolute;
+  bottom: 0;
+
+  button {
+    border: none;
+    padding: 3px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: white;
+  }
+
+  .editBtn {
+    background-color: #118df0;
+  }
+
+  .deleteBtn {
+    background-color: red;
+  }
+}

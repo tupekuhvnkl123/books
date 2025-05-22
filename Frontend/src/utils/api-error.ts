@@ -3,6 +3,6 @@ export const getApiErr = (error: any): string => {
 
   const errorMsg =
     apiError?.response?.data?.error?.message ||
-    "שגיאה בשרת, צור קשר ונסה שוב מאוחר יותר";
+    "Something went wrong, try again later";
   return errorMsg;
 };

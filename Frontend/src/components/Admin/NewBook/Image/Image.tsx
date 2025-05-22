@@ -7,9 +7,15 @@ type ImageProps = {
   err?: string;
   changeImage: (img?: string) => void;
   currentImage?: string;
+  removeEditPreviewImg: () => void;
 };
 
-const Image = ({ err, changeImage, currentImage }: ImageProps) => {
+const Image = ({
+  err,
+  changeImage,
+  currentImage,
+  removeEditPreviewImg,
+}: ImageProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const triggerFileInput = () => {
@@ -46,6 +52,7 @@ const Image = ({ err, changeImage, currentImage }: ImageProps) => {
 
   const handleRemoveImage = () => {
     changeImage(undefined);
+    removeEditPreviewImg();
   };
 
   return (

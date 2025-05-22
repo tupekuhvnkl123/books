@@ -11,7 +11,7 @@ type HomeProps = { admin?: boolean };
 const Home = ({ admin }: HomeProps) => {
   const [searchValue, setSearchValue] = useState("");
 
-  const { isLoading, data, error, isError } = useQuery({
+  const { isLoading, data, error, isError, refetch } = useQuery({
     queryKey: ["books", { searchValue }],
     queryFn: () => getBooks({ searchValue }),
   });
@@ -28,7 +28,12 @@ const Home = ({ admin }: HomeProps) => {
       <Search changeSearchValue={changeSearch} />
 
       {/* Results */}
-      <Books data={data} isLoading={isLoading} admin={admin} />
+      <Books
+        data={data}
+        isLoading={isLoading}
+        admin={admin}
+        refetch={() => refetch()}
+      />
     </section>
   );
 };

@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import S from "./Book.module.scss";
 import Content from "./Content/Content";
 import PurchaseInfo from "./PurchaseInfo/PurchaseInfo";
-import { getBook } from "../../api/Books";
+import { getBookById } from "../../api/Books";
 import { Link, useParams } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 import Popup from "../UI/Popup/Popup";
@@ -14,7 +14,7 @@ const Book = () => {
 
   const { isLoading, data, error, isError } = useQuery({
     queryKey: [id],
-    queryFn: () => getBook(id!),
+    queryFn: () => getBookById(id!),
     enabled: !!id,
   });
 

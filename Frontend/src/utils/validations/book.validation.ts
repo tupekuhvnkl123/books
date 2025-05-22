@@ -43,15 +43,19 @@ export const validateImage = (image?: string): string => {
   return "";
 };
 
-export const newBookValidationErrors = (
-  bookData: NewBookDataType
-): NewBookErrorsType => {
+export const newBookValidationErrors = ({
+  bookData,
+  editMode,
+}: {
+  bookData: NewBookDataType;
+  editMode?: "editMode";
+}): NewBookErrorsType => {
   const { author, publisher, description, img, price, title } = bookData;
 
   const newErrors = {
     title: validateTitle(title),
     price: validatePrice(price),
-    img: validateImage(img),
+    img: editMode ? "" : validateImage(img),
     description: validateDescription(description),
     author: validateAuthor(author),
     publisher: validatePublisher(publisher),

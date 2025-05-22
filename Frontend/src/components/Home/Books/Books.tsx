@@ -8,9 +8,10 @@ type BooksProps = {
   data?: BookPreviewType[];
   isLoading: boolean;
   admin?: boolean;
+  refetch?: () => void;
 };
 
-const Books = ({ data, isLoading, admin }: BooksProps) => {
+const Books = ({ data, isLoading, admin, refetch }: BooksProps) => {
   const breakpointColumnsObj = {
     default: 3,
     700: 2,
@@ -32,7 +33,7 @@ const Books = ({ data, isLoading, admin }: BooksProps) => {
     <Masonry breakpointCols={breakpointColumnsObj} className={S.container}>
       {data &&
         data.map((book) => (
-          <BookItem key={book.id} data={book} admin={admin} />
+          <BookItem key={book.id} data={book} admin={admin} refetch={refetch} />
         ))}
     </Masonry>
   );

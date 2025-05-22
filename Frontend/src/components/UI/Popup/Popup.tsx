@@ -14,7 +14,7 @@ const Popup = ({ msg, type = "error", error }: PopupProps) => {
   const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
-    // Automatically close after 3 seconds
+    // Automatically close after 4 seconds
     const timer = setTimeout(() => handleClose(), 4000);
     return () => clearTimeout(timer);
   }, []);
