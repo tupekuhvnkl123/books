@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { PiCurrencyDollarSimple } from "react-icons/pi";
 import { ROUTES } from "../../../routes/routePaths";
 import BookActions from "../../Admin/BookActions/BookActions";
+import PermissionGate from "../../HOC/PermissionGate";
+import { UserRole } from "../../../types/Users.types";
 
 type ProductItemProps = {
   data: BookPreviewType;
@@ -19,7 +21,9 @@ const BookItem = ({ data, refetch }: ProductItemProps) => {
       <div className={S.container}>
         <div className={S.imageContainer}>
           <img src={img} alt="image" />
-          <BookActions bookId={id} refetch={refetch} />
+          <PermissionGate roles={[UserRole.ADMIN]}>
+            <BookActions bookId={id} refetch={refetch} />
+          </PermissionGate>
         </div>
         <span className={S.title}>{title}</span>
         <div className={S.price}>
