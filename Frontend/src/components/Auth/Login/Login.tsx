@@ -5,7 +5,6 @@ import { AuthCtx } from "../../../context/AuthCtx";
 import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { LoginFormData, loginRequest } from "../../../api/Auth";
-import { getApiErr } from "../../../utils/api-error";
 import Popup from "../../UI/Popup/Popup";
 import { ROUTES } from "../../../routes/routePaths";
 
@@ -21,7 +20,7 @@ const Login = () => {
 
   return (
     <section className={S.container}>
-      {isError && <Popup msg={getApiErr(error)} />}
+      {isError && <Popup error={error} />}
       <LoginForm
         login={(data: LoginFormData) => mutate(data)}
         isPending={isPending}

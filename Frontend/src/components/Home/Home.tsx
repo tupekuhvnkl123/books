@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Popup from "../UI/Popup/Popup";
 import { getBooks } from "../../api/Books";
-import { getApiErr } from "../../utils/api-error";
 
 type HomeProps = { admin?: boolean };
 
@@ -23,7 +22,7 @@ const Home = ({ admin }: HomeProps) => {
 
   return (
     <section className={S.container}>
-      {isError && <Popup msg={getApiErr(error)} />}
+      {isError && <Popup error={error} />}
 
       {/* Search Bar */}
       <Search changeSearchValue={changeSearch} />

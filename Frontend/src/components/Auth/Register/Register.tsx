@@ -3,7 +3,6 @@ import S from "./Register.module.scss";
 import RegisterForm from "./RegisterForm";
 import { RegisterFormData, registerRequest } from "../../../api/Auth";
 import { useMutation } from "@tanstack/react-query";
-import { getApiErr } from "../../../utils/api-error";
 import Popup from "../../UI/Popup/Popup";
 import { ROUTES } from "../../../routes/routePaths";
 
@@ -17,7 +16,7 @@ const Register = () => {
 
   return (
     <section className={S.container}>
-      {isError && <Popup msg={getApiErr(error)} />}
+      {isError && <Popup error={error} />}
 
       <RegisterForm
         register={(data: RegisterFormData) => mutate(data)}

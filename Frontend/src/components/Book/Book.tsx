@@ -6,7 +6,6 @@ import { getBook } from "../../api/Books";
 import { Link, useParams } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 import Popup from "../UI/Popup/Popup";
-import { getApiErr } from "../../utils/api-error";
 import { IoIosArrowBack } from "react-icons/io";
 import { ROUTES } from "../../routes/routePaths";
 
@@ -21,16 +20,16 @@ const Book = () => {
 
   if (isLoading) {
     return (
-      <div className={S.loadingContainer}>
+      <div className={S.processContainer}>
         <PuffLoader color="#118DF0" size={100} />
       </div>
     );
   }
 
-  if (!data || isError) {
+  if (isError || !data) {
     return (
-      <div className={S.loadingContainer}>
-        <Popup msg={getApiErr(error)} />
+      <div className={S.processContainer}>
+        {isError && <Popup error={error} />}
         <Link className={S.homeLink} to={ROUTES.HOME}>
           חזרה לדף הבית
         </Link>

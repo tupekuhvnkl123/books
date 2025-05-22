@@ -10,6 +10,7 @@ import Form from "./Form/Form";
 import useNewBookForm from "../../../hooks/useNewBookForm";
 import Image from "./Image/Image";
 import { ROUTES } from "../../../routes/routePaths";
+import Popup from "../../UI/Popup/Popup";
 
 const NewBook = () => {
   const location = useLocation();
@@ -18,7 +19,7 @@ const NewBook = () => {
   const { bookData, checkValidation, errors, updateBookData } =
     useNewBookForm();
 
-  const { isPending, mutate } = useMutation({
+  const { isPending, mutate, isError, error } = useMutation({
     mutationFn: createBook,
     onSuccess: () => {
       navigate(ROUTES.HOME);
@@ -40,6 +41,7 @@ const NewBook = () => {
 
   return (
     <div className={S.container}>
+      {isError && <Popup error={error} />}
       <button className={S.createButton} onClick={createBookHandler}>
         {isPending ? <PuffLoader color="#fff" size={20} /> : "Create"}
       </button>

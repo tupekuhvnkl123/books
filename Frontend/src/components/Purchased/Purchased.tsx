@@ -5,7 +5,6 @@ import { AuthCtx } from "../../context/AuthCtx";
 import { useQuery } from "@tanstack/react-query";
 import { getPurchasedBooks } from "../../api/Books";
 import Popup from "../UI/Popup/Popup";
-import { getApiErr } from "../../utils/api-error";
 import Books from "../Home/Books/Books";
 import { ROUTES } from "../../routes/routePaths";
 
@@ -27,7 +26,7 @@ const Purchased = () => {
 
   return (
     <div className={S.container}>
-      {isError && <Popup msg={getApiErr(error)} />}
+      {isError && <Popup error={error} />}
       <h1 className={S.title}>Purchased Books</h1>
       <Books data={data} isLoading={isLoading} />
     </div>

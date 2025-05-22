@@ -24,9 +24,10 @@
 
   .price {
     display: flex;
+    align-items: center;
     font-size: 15px;
     color: black;
     font-weight: 500;
-    column-gap: 5px;
+    column-gap: 2px;
   }
 }
