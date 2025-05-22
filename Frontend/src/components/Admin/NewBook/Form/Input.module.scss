@@ -1,0 +1,45 @@
+.errorMsg {
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: -5px;
+  margin-left: 3px;
+  line-height: 12px;
+}
+
+.inputContainer.textarea {
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px 0 15px;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 6px;
+  background-color: #fdfdfd;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  flex-shrink: 0;
+  position: relative;
+
+  input,
+  textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: black;
+    resize: none;
+  }
+
+  input::placeholder {
+    color: black;
+  }
+}

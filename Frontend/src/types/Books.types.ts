@@ -13,12 +13,20 @@ export type BookType = {
 
 export type BookPreviewType = Pick<BookType, "id" | "title" | "img" | "price">;
 
-// export type NewProductDataType = {
-//   title?: string;
-//   description?: string;
-//   images?: string[];
-//   price?: number;
-//   category?: string;
-//   city?: string;
-//   phoneNumber?: string;
-// };
+export type NewBookDataType = {
+  title?: string;
+  description?: string;
+  img?: string;
+  price?: number;
+  author?: string;
+  publisher?: string;
+};
+
+export type NewBookErrorsType = {
+  title?: string;
+  description?: string;
+  img?: string;
+  price?: string;
+  author?: string;
+  publisher?: string;
+};

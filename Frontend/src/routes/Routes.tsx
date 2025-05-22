@@ -25,7 +25,7 @@ const Routes = () => {
           path: "/admin",
           children: [
             { index: true, element: <Navigate to="/" replace /> },
-            { path: "new-book/:id?", element: <NewBook /> },
+            { path: "new-book", element: <NewBook /> },
           ],
         },
         {

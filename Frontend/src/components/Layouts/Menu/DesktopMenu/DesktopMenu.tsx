@@ -13,7 +13,7 @@ const DesktopMenu = () => {
   return (
     <div className={S.container}>
       <Link to={"/"} key={"logo"} className={S.logo}>
-        <img src="logo.svg" />
+        <img src="/logo.svg" />
       </Link>
       {menuItems.map((item) => (
         <PermissionGate key={item.id} roles={item.permissionRoles}>

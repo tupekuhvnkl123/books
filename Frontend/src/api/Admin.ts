@@ -1,8 +1,8 @@
 import axios from "./axiosInstance";
-import { BookType } from "../types/Books.types";
+import { BookType, NewBookDataType } from "../types/Books.types";
 
-export const createBook = async (): Promise<BookType> => {
-  const response = await axios.post(`/admin`);
+export const createBook = async (data: NewBookDataType): Promise<BookType> => {
+  const response = await axios.post(`/admin`, data);
   return response.data;
 };
 

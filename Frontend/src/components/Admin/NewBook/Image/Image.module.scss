@@ -7,25 +7,26 @@
   border-bottom: 1px solid #eaeaea;
 }
 
-.images {
+.contentContainer {
   display: flex;
-  height: 120px;
+  height: 130px;
   width: 100%;
-  overflow-x: auto;
   align-items: center;
+  justify-content: center;
   column-gap: 10px;
-
-  &.empty {
-    justify-content: center;
-  }
 }
 
 .addButton {
-  height: min-content;
-  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 5px;
+  height: auto;
+  aspect-ratio: 1/1;
+  padding: 10px;
   border: none;
-  background-color: transparent;
-  flex-shrink: 0;
+  border-radius: 10px;
   span {
     color: black;
     font-size: 12px;
@@ -34,7 +35,7 @@
 
 .imgContainer {
   height: 100%;
-  width: 85px;
+  width: 100%;
   position: relative;
   flex-shrink: 0;
   border-radius: 8px;
@@ -47,25 +48,28 @@
   }
   .removeBtn {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: red;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
   }
-}
-
-.images::-webkit-scrollbar {
-  display: none;
 }
 
 .error_counter {
   display: flex;
   column-gap: 20px;
-  .errorMsg {
-    margin-top: 1px;
+  .error {
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 5px;
   }
-}
-
-.counter {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 14px;
-  align-items: center;
+  .counter {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14px;
+    align-items: center;
+  }
 }

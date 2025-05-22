@@ -38,8 +38,6 @@ const useAuthCtx = (): AuthCtxType => {
 
     if (accessToken) {
       decodeAndSetUser(accessToken);
-    } else {
-      logout();
     }
     setAuthLoading(false);
   }, []);
