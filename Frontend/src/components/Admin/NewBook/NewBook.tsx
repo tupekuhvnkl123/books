@@ -24,6 +24,7 @@ const NewBook = () => {
     isEditMode,
     isError,
     isPending,
+    error,
     removeEditPreviewImg,
   } = useNewBook();
 
@@ -35,7 +36,7 @@ const NewBook = () => {
 
   return (
     <div className={S.container}>
-      {isError && <Popup />}
+      {isError && <Popup error={error!} />}
       <button
         className={S.createButton}
         onClick={createBookHandler}

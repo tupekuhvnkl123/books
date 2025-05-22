@@ -21,7 +21,12 @@ const useNewBook = () => {
     undefined
   );
 
-  const { data: fetchedBook, isSuccess } = useQuery({
+  const {
+    data: fetchedBook,
+    isSuccess,
+    error: fetchDataError,
+    isError: fetchDataIsError,
+  } = useQuery({
     queryKey: [editId],
     queryFn: () => getBookById(editId!),
     enabled: !!editId,
@@ -83,9 +88,10 @@ const useNewBook = () => {
     editPreviewImg,
     createBookHandler,
     isEditMode,
-    isError,
+    isError: isError || fetchDataIsError,
     isPending,
     removeEditPreviewImg,
+    error: error || fetchDataError,
   };
 };
 
