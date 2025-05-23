@@ -7,13 +7,13 @@ import BookActions from "../../Admin/BookActions/BookActions";
 import PermissionGate from "../../HOC/PermissionGate";
 import { UserRole } from "../../../types/Users.types";
 
-type ProductItemProps = {
+type BookItemProps = {
   data: BookPreviewType;
   refetch?: () => void;
   purchasedPage?: boolean;
 };
 
-const BookItem = ({ data, refetch, purchasedPage }: ProductItemProps) => {
+const BookItem = ({ data, refetch, purchasedPage }: BookItemProps) => {
   const { img, price, title, id } = data;
 
   return (

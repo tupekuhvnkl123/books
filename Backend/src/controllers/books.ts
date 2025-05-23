@@ -12,11 +12,10 @@ export const getBooks = async (
 ) => {
   try {
     const { search } = req.query;
-
     const filter: Record<string, any> = {};
 
     if (search) {
-      filter.title = { $regex: search, $options: "i" }; // Case-insensitive search
+      filter.title = { $regex: search, $options: "i" };
     }
 
     const books = await Book.find(filter).sort({ createdAt: -1 });
@@ -34,12 +33,9 @@ export const getBook = async (
 ) => {
   try {
     const { bookId } = req.params;
-
     const book = await Book.findById(bookId).populate("seller", "name");
 
-    if (!book) {
-      throw createHttpError.NotFound("Couldn't find book.");
-    }
+    if (!book) throw createHttpError.NotFound("Couldn't find book.");
 
     res.status(200).json(book);
   } catch (error) {
@@ -56,9 +52,7 @@ export const getPurchasedBooks = async (
     const userId = req.user?.userId;
     const user = await User.findById(userId).populate("purchased");
 
-    if (!user || !userId) {
-      throw createHttpError.NotFound("User not found");
-    }
+    if (!user || !userId) throw createHttpError.NotFound("User not found");
 
     res.status(200).json(user.purchased);
   } catch (error) {
@@ -76,15 +70,11 @@ export const purchaseBook = async (
     const { bookId } = req.params;
 
     const user = await User.findById(userId);
-    if (!user || !userId) {
-      throw createHttpError.NotFound("User not found");
-    }
+    if (!user || !userId) throw createHttpError.NotFound("User not found");
 
     const book = await Book.findById(bookId);
+    if (!book) throw createHttpError.NotFound("Couldn't find book.");
 
-    if (!book) {
-      throw createHttpError.NotFound("Couldn't find book.");
-    }
     const checkoutSession = await createCheckoutSession(book);
 
     if (!user.purchased.includes(book._id)) {

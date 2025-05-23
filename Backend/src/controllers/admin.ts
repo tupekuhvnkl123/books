@@ -6,6 +6,13 @@ import { ReqAuth } from "../types/types";
 import { createMongoBook, updateMongoBook } from "../services/mongoose/books";
 import Book from "../models/book";
 
+const throwIfInvalid = (req: ReqAuth) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw createHttpError(400, errors.array()[0].msg);
+  }
+};
+
 export const createBook = async (
   req: ReqAuth,
   res: Response,
@@ -13,20 +20,12 @@ export const createBook = async (
 ) => {
   try {
     const userId = req.user?.userId;
+    if (!userId) throw createHttpError(404, "User not found");
 
-    if (!userId) {
-      throw createHttpError(404, "User not found");
-    }
+    throwIfInvalid(req);
 
-    // Handle validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty() || !userId) {
-      throw createHttpError[400](errors.array()[0].msg);
-    }
-
-    const newProduct = await createMongoBook({ data: req.body, userId });
-
-    res.status(201).json(newProduct);
+    const newBook = await createMongoBook({ data: req.body, userId });
+    res.status(201).json(newBook);
   } catch (error) {
     next(error);
   }
@@ -38,17 +37,11 @@ export const updateBook = async (
   next: NextFunction
 ) => {
   try {
-    const userId = req.user?.userId;
     const { bookId } = req.params;
+    const userId = req.user?.userId;
+    if (!userId) throw createHttpError(404, "User not found");
 
-    if (!userId) {
-      throw createHttpError(404, "User not found");
-    }
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw createHttpError(400, errors.array()[0].msg);
-    }
+    throwIfInvalid(req);
 
     const updatedBook = await updateMongoBook({
       bookId,
@@ -69,21 +62,11 @@ export const deleteBook = async (
 ) => {
   try {
     const userId = req.user?.userId;
-
     const { bookId } = req.params;
+    if (!userId) throw createHttpError.NotFound("User not found");
 
-    if (!userId) {
-      throw createHttpError.NotFound("User not found");
-    }
-
-    const book = await Book.findOneAndDelete({
-      seller: userId,
-      _id: bookId,
-    });
-
-    if (!book) {
-      throw createHttpError.NotFound("Couldn't find book.");
-    }
+    const book = await Book.findOneAndDelete({ seller: userId, _id: bookId });
+    if (!book) throw createHttpError.NotFound("Couldn't find book.");
 
     await User.updateMany(
       { purchased: bookId },

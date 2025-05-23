@@ -8,7 +8,7 @@ import {
 } from "../controllers/books";
 
 const router = express.Router();
-//!
+
 router.get("/", getBooks);
 // @ts-expect-error
 router.get("/purchased", checkAuth, getPurchasedBooks);

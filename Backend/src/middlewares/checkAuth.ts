@@ -10,7 +10,7 @@ const JWT_SECRET = process.env.JWT_PRIVATE_KEY;
 export default async (req: ReqAuth, res: Response, next: NextFunction) => {
   try {
     const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
+    const token = authHeader?.split(" ")[1];
 
     if (!token) {
       throw createHttpError.Unauthorized("Authentication failed.");
@@ -28,7 +28,9 @@ export default async (req: ReqAuth, res: Response, next: NextFunction) => {
       throw createHttpError.BadRequest("Invalid token format.");
     }
 
-    req.user = { userId: decodedToken.user.id, role: decodedToken.user.role };
+    const { id: userId, role } = decodedToken.user;
+
+    req.user = { userId, role };
     next();
   } catch (err) {
     return next(err);

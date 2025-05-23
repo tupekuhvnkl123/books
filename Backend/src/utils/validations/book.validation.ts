@@ -1,5 +1,8 @@
 import { body, ValidationChain } from "express-validator";
 
+const base64ImageRegex = /^data:image\/(png|jpeg|jpg);base64,[a-zA-Z0-9+/=]+$/;
+const MAX_IMG_SIZE = 5 * 1024 * 1024; // 5MB
+
 const validateTitle = body("title")
   .isString()
   .isLength({ max: 25 })
@@ -18,9 +21,7 @@ const validateImg = body("img")
   .isString()
   .withMessage("Image must be a base64 string")
   .custom((base64: string) => {
-    const base64Regex = /^data:image\/(png|jpeg|jpg);base64,[a-zA-Z0-9+/=]+$/;
-
-    if (!base64Regex.test(base64)) {
+    if (!base64ImageRegex.test(base64)) {
       throw new Error(
         "Invalid image format. Supported formats are PNG, JPEG, and JPG."
       );
@@ -28,9 +29,8 @@ const validateImg = body("img")
 
     const base64String = base64.split(",")[1];
     const buffer = Buffer.from(base64String, "base64");
-    const maxSize = 5 * 1024 * 1024;
 
-    if (buffer.length > maxSize) {
+    if (buffer.length > MAX_IMG_SIZE) {
       throw new Error("Image size exceeds the maximum limit of 5MB.");
     }
 
@@ -44,15 +44,6 @@ const validateAuthor = body("author")
 const validatePublisher = body("publisher")
   .isString()
   .withMessage("Publisher must be a string");
-
-export const validateProduct = [
-  validateTitle,
-  validateDescription,
-  validatePrice,
-  validateImg,
-  validateAuthor,
-  validatePublisher,
-];
 
 // Creating book validation
 export const validateBook: ValidationChain[] = [

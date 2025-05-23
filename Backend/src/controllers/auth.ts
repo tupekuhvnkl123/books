@@ -1,9 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import User from "../models/user";
 import { validationResult } from "express-validator";
 import createHttpError from "http-errors";
+import User from "../models/user";
 import { createToken } from "../services/jwt";
+
+const throwIfInvalid = (req: Request) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw createHttpError(400, errors.array()[0].msg);
+  }
+};
 
 export const register = async (
   req: Request,
@@ -11,16 +18,11 @@ export const register = async (
   next: NextFunction
 ) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw createHttpError[400](errors.array()[0].msg);
-    }
+    throwIfInvalid(req);
 
     const { username, password, name } = req.body;
 
-    // Hash the password
-    const saltRounds = 12;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const newUser = new User({
       username: username.toLowerCase(),
@@ -47,14 +49,14 @@ export const login = async (
     const user = await User.findOne({ username: username.toLowerCase() });
     if (!user) {
       throw createHttpError.Unauthorized(
-        "שם המשתמש או הסיסמה שגויים, אנא נסה שוב"
+        "The username or password is incorrect, please try again"
       );
     }
 
     const passwordIsValid = await bcrypt.compare(password, user.password);
     if (!passwordIsValid) {
       throw createHttpError.Unauthorized(
-        "שם המשתמש או הסיסמה שגויים, אנא נסה שוב"
+        "The username or password is incorrect, please try again"
       );
     }
 
