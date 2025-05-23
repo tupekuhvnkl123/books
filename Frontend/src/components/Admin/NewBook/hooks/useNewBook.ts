@@ -33,7 +33,7 @@ const useNewBook = () => {
   }, [fetchedBook, isSuccess]);
 
   const createBookHandler = () => {
-    const isValid = checkValidation("editMode");
+    const isValid = checkValidation(isEditMode);
     if (!isValid) return;
     mutate();
   };
@@ -42,7 +42,7 @@ const useNewBook = () => {
     setBookData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const checkValidation = (editMode?: "editMode"): boolean => {
+  const checkValidation = (editMode?: boolean): boolean => {
     const newErrors: NewBookErrorsType = newBookValidationErrors({
       bookData,
       editMode,

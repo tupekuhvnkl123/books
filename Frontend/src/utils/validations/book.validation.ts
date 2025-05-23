@@ -48,7 +48,7 @@ export const newBookValidationErrors = ({
   editMode,
 }: {
   bookData: NewBookDataType;
-  editMode?: "editMode";
+  editMode?: boolean;
 }): NewBookErrorsType => {
   const { author, publisher, description, img, price, title } = bookData;
 
