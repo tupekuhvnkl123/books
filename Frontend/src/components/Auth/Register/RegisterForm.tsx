@@ -6,8 +6,9 @@ import {
   validatePassword,
   validateUsername,
 } from "../../../utils/validations/auth.validation";
-import { ReactSVG } from "react-svg";
 import { PuffLoader } from "react-spinners";
+import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 type FormErrors = {
   name?: string;
@@ -37,7 +38,6 @@ const RegisterForm = ({ register, isPending }: RegisterFormProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-
     const newErrors: FormErrors = {
       name: validateName(formData.name),
       username: validateUsername(formData.username),
@@ -85,10 +85,12 @@ const RegisterForm = ({ register, isPending }: RegisterFormProps) => {
           value={formData.password}
           onChange={handleChange}
         />
-        <ReactSVG
-          src="/icons/Auth/hide-password.svg"
-          onClick={togglePasswordVisibility}
-        />
+
+        {isPasswordVisible ? (
+          <AiOutlineEyeInvisible onClick={togglePasswordVisibility} />
+        ) : (
+          <AiOutlineEye onClick={togglePasswordVisibility} />
+        )}
       </div>
       {errors.password && <span className={S.error}>{errors.password}</span>}
 

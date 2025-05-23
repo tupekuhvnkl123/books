@@ -1,8 +1,7 @@
-// src/routes/routePaths.ts
 export const ROUTES = {
   HOME: "/",
   PURCHASED: "/purchased",
-  BOOK: (id: string = ":id") => `/book/${id}`,
+  BOOK: "/book",
   ADMIN: {
     ROOT: "/admin",
     NEW_BOOK: "/admin/new-book",
@@ -13,3 +12,8 @@ export const ROUTES = {
     REGISTER: "/auth/register",
   },
 };
+
+export const getBookRoute = (id: string) => `${ROUTES.BOOK}/${id}`;
+
+export const getEditBookRoute = (id: string) =>
+  `${ROUTES.ADMIN.NEW_BOOK}?editId=${id}`;

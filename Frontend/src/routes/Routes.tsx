@@ -1,4 +1,3 @@
-// src/routes/Routes.tsx
 import {
   createBrowserRouter,
   Navigate,
@@ -12,7 +11,9 @@ import Home from "../components/Home/Home";
 import Book from "../components/Book/Book";
 import NewBook from "../components/Admin/NewBook/NewBook";
 import Purchased from "../components/Purchased/Purchased";
-import { ROUTES } from "./routePaths";
+import { getBookRoute, ROUTES } from "./routePaths";
+import PermissionGate from "../components/HOC/PermissionGate";
+import { UserRole } from "../types/Users.types";
 
 const Routes = () => {
   const router = createBrowserRouter(
@@ -22,8 +23,18 @@ const Routes = () => {
         element: <AppElement />,
         children: [
           { path: ROUTES.HOME, element: <Home /> },
-          { path: ROUTES.PURCHASED, element: <Purchased /> },
-          { path: ROUTES.BOOK(), element: <Book /> },
+          {
+            path: ROUTES.PURCHASED,
+            element: (
+              <PermissionGate
+                roles={[UserRole.USER, UserRole.ADMIN]}
+                redirectRoute={ROUTES.AUTH.LOGIN}
+              >
+                <Purchased />
+              </PermissionGate>
+            ),
+          },
+          { path: getBookRoute(":id"), element: <Book /> },
 
           {
             path: ROUTES.ADMIN.ROOT,
@@ -31,7 +42,14 @@ const Routes = () => {
               { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
               {
                 path: ROUTES.ADMIN.NEW_BOOK,
-                element: <NewBook />,
+                element: (
+                  <PermissionGate
+                    roles={[UserRole.ADMIN]}
+                    redirectRoute={ROUTES.HOME}
+                  >
+                    <NewBook />
+                  </PermissionGate>
+                ),
               },
             ],
           },

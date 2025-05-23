@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import S from "./DesktopMenu.module.scss";
-import { menuItems } from "../menu-items";
+import { MENU_ITEMS } from "../config";
 import PermissionGate from "../../../HOC/PermissionGate";
 import MenuItem from "../MenuItem";
 import { useContext } from "react";
@@ -25,11 +25,13 @@ const DesktopMenu = () => {
       <Link to={ROUTES.HOME} key={"logo"} className={S.logo}>
         <img src="/logo.svg" />
       </Link>
-      {menuItems.map((item) => (
+
+      {MENU_ITEMS.map((item) => (
         <PermissionGate key={item.id} roles={item.permissionRoles}>
           <MenuItem item={item} />
         </PermissionGate>
       ))}
+
       <button className={S.authBtn} onClick={handleAuthButton}>
         {isAuthenticated ? (
           <IoIosLogOut className={S.icon} />

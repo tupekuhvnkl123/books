@@ -12,3 +12,15 @@ export type AuthCtxType = {
   logout: () => void;
   authLoading: boolean;
 };
+
+export type PopupCtxType = {
+  popupIsVisible: boolean;
+  message: string;
+  showPopup: (msg: string) => void;
+  closePopup: () => void;
+};
+
+export enum PopupTypes {
+  ERROR = "error",
+  SUCCESS = "success",
+}

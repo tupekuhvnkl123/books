@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import createHttpError from "http-errors";
-import { ReqAuth } from "../types/types";
 import { UserRole } from "../types/user.types";
 
-export const checkAdmin = (req: ReqAuth, res: Response, next: NextFunction) => {
+const checkAdmin = (req: Request, res: Response, next: NextFunction) => {
   const userRole = req.user?.role;
 
   if (!userRole) {
@@ -16,3 +15,5 @@ export const checkAdmin = (req: ReqAuth, res: Response, next: NextFunction) => {
 
   next();
 };
+
+export default checkAdmin;

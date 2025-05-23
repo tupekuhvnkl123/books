@@ -10,11 +10,11 @@ import {
 const router = express.Router();
 
 router.get("/", getBooks);
-// @ts-expect-error
+
 router.get("/purchased", checkAuth, getPurchasedBooks);
 
-// @ts-expect-error
 router.post("/:bookId/purchase", checkAuth, purchaseBook);
+
 router.get("/:bookId", getBook);
 
 export default router;

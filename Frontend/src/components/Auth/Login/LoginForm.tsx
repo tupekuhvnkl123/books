@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { LoginFormData } from "../../../api/Auth";
 import S from "./Login.module.scss";
-import { ReactSVG } from "react-svg";
 import { PuffLoader } from "react-spinners";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 type FormErrors = {
   username?: string;
@@ -71,10 +71,11 @@ const LoginForm = ({ login, isPending }: LoginFormProps) => {
           value={formData.password}
           onChange={handleChange}
         />
-        <ReactSVG
-          src="/icons/Auth/hide-password.svg"
-          onClick={togglePasswordVisibility}
-        />
+        {isPasswordVisible ? (
+          <AiOutlineEyeInvisible onClick={togglePasswordVisibility} />
+        ) : (
+          <AiOutlineEye onClick={togglePasswordVisibility} />
+        )}
       </div>
       {errors.password && <span className={S.error}>{errors.password}</span>}
       <button type="submit" disabled={isPending}>

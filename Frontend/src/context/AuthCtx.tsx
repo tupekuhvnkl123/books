@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { AuthCtxType } from "../types/context.types";
-import useAuthCtx from "../hooks/useAuthCtx";
+import useAuthCtx from "./hooks/useAuthCtx";
 
 const initialValue = {
   isAuthenticated: false,

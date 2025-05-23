@@ -1,6 +1,7 @@
 import { body, ValidationChain } from "express-validator";
 
 const base64ImageRegex = /^data:image\/(png|jpeg|jpg);base64,[a-zA-Z0-9+/=]+$/;
+
 const MAX_IMG_SIZE = 5 * 1024 * 1024; // 5MB
 
 const validateTitle = body("title")
@@ -45,7 +46,6 @@ const validatePublisher = body("publisher")
   .isString()
   .withMessage("Publisher must be a string");
 
-// Creating book validation
 export const validateBook: ValidationChain[] = [
   validateTitle.exists({ checkFalsy: true }).withMessage("Title is required"),
   validateDescription
@@ -59,7 +59,6 @@ export const validateBook: ValidationChain[] = [
     .withMessage("Publisher is required"),
 ];
 
-// updating book validation
 export const validateBookUpdate: ValidationChain[] = [
   validateTitle.optional({ checkFalsy: true }),
   validateDescription.optional({ checkFalsy: true }),

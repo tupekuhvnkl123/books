@@ -8,9 +8,9 @@ const TopLoader = () => {
 
   useEffect(() => {
     if (navigation.state === "loading") {
-      NProgress.start(); // Start loader when navigation begins
+      NProgress.start();
     } else {
-      NProgress.done(); // Stop loader when navigation ends
+      NProgress.done();
     }
   }, [navigation.state]);
 

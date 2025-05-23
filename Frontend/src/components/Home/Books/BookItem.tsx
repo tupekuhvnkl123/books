@@ -2,7 +2,7 @@ import { BookPreviewType } from "../../../types/Books.types";
 import S from "./BookItem.module.scss";
 import { Link } from "react-router-dom";
 import { PiCurrencyDollarSimple } from "react-icons/pi";
-import { ROUTES } from "../../../routes/routePaths";
+import { getBookRoute, ROUTES } from "../../../routes/routePaths";
 import BookActions from "../../Admin/BookActions/BookActions";
 import PermissionGate from "../../HOC/PermissionGate";
 import { UserRole } from "../../../types/Users.types";
@@ -17,7 +17,7 @@ const BookItem = ({ data, refetch, purchasedPage }: BookItemProps) => {
   const { img, price, title, id } = data;
 
   return (
-    <Link to={ROUTES.BOOK(id)}>
+    <Link to={getBookRoute(id)}>
       <div className={S.container}>
         <div className={S.imageContainer}>
           <img src={img} alt="image" />

@@ -6,9 +6,11 @@ import { FiImage } from "react-icons/fi";
 type ImageProps = {
   err?: string;
   changeImage: (img?: string) => void;
-  currentImage?: string;
+  currentImage?: string | null;
   removeEditPreviewImg: () => void;
 };
+
+const validTypes = ["image/png", "image/jpeg", "image/jpg"];
 
 const Image = ({
   err,
@@ -26,16 +28,9 @@ const Image = ({
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file) {
-      return alert("Please select a file");
-    }
-    const validTypes = ["image/png", "image/jpeg", "image/jpg"];
-    if (!validTypes.includes(file.type)) {
-      return alert("Unsupported file type");
-    }
-    if (event.target.files?.length !== 1) {
-      return alert("Please select only one image");
-    }
+
+    if (!file) return alert("Please select a file");
+    if (!validTypes.includes(file.type)) return alert("Unsupported file type");
 
     try {
       const reader = new FileReader();
@@ -45,7 +40,6 @@ const Image = ({
       };
       reader.readAsDataURL(file);
     } catch (error) {
-      console.error("Error processing the image:", error);
       alert("Failed to upload image. Please try again.");
     }
   };
@@ -65,7 +59,7 @@ const Image = ({
         style={{ display: "none" }}
       />
 
-      <div className={`${S.contentContainer}`}>
+      <div className={S.contentContainer}>
         {currentImage ? (
           <div className={S.imgContainer}>
             <button className={S.removeBtn}>

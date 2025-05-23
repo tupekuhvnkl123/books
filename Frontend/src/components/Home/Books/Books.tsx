@@ -3,6 +3,7 @@ import S from "./Books.module.scss";
 import Masonry from "react-masonry-css";
 import BookItem from "./BookItem";
 import { BookPreviewType } from "../../../types/Books.types";
+import { breakpointColumnsObj } from "./constants";
 
 type BooksProps = {
   data?: BookPreviewType[];
@@ -12,11 +13,6 @@ type BooksProps = {
 };
 
 const Books = ({ data, isLoading, refetch, purchasedPage }: BooksProps) => {
-  const breakpointColumnsObj = {
-    default: 3,
-    700: 2,
-  };
-
   if (isLoading) {
     return <BooksLoading />;
   }

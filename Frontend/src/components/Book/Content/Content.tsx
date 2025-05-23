@@ -11,7 +11,6 @@ type ContentProps = {
 const Content = ({ title, price, description }: ContentProps) => {
   return (
     <div className={S.container}>
-      {/* Title and Price */}
       <div className={S.title_price}>
         <h1>{title}</h1>
         <div className={S.priceContainer}>
@@ -21,7 +20,6 @@ const Content = ({ title, price, description }: ContentProps) => {
       </div>
 
       <hr className={S.separateLine} />
-      {/* Description */}
       <p className={S.description}>{description}</p>
     </div>
   );

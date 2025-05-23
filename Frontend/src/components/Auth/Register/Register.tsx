@@ -1,23 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import S from "./Register.module.scss";
 import RegisterForm from "./RegisterForm";
-import { RegisterFormData, registerRequest } from "../../../api/Auth";
-import { useMutation } from "@tanstack/react-query";
-import Popup from "../../UI/Popup/Popup";
+import { RegisterFormData } from "../../../api/Auth";
 import { ROUTES } from "../../../routes/routePaths";
+import useRegister from "../../../api/reactQueryHooks/useRegister";
 
 const Register = () => {
-  const navigate = useNavigate();
-
-  const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: registerRequest,
-    onSuccess: () => navigate(ROUTES.AUTH.LOGIN),
-  });
+  const { mutate, isPending } = useRegister();
 
   return (
     <section className={S.container}>
-      {isError && <Popup error={error} />}
-
       <RegisterForm
         register={(data: RegisterFormData) => mutate(data)}
         isPending={isPending}

@@ -9,18 +9,16 @@ type InputProps = {
 };
 
 const Input = ({ err, inputProps, icon: Icon, isTextarea }: InputProps) => {
+  const { value = "", type = "text" } = inputProps;
+
   return (
     <>
       <div className={`${S.inputContainer} ${isTextarea && S.textarea}`}>
         {Icon && <Icon />}
         {isTextarea ? (
-          <textarea {...inputProps} value={inputProps.value || ""} />
+          <textarea {...inputProps} value={value} />
         ) : (
-          <input
-            {...inputProps}
-            type={inputProps.type || "text"}
-            value={inputProps.value || ""}
-          />
+          <input {...inputProps} type={type} value={value} />
         )}
       </div>
       {err && <p className={S.errorMsg}>{err}</p>}

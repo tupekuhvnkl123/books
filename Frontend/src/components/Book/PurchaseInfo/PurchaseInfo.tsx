@@ -1,7 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
 import { BookType } from "../../../types/Books.types";
 import S from "./PurchaseInfo.module.scss";
-import { purchaseBook } from "../../../api/Books";
+import { useContext } from "react";
+import { AuthCtx } from "../../../context/AuthCtx";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../routes/routePaths";
+import { PuffLoader } from "react-spinners";
+import usePurchaseBook from "../../../api/reactQueryHooks/usePurchaseBook";
 
 type PurchaseInfoProps = {
   author: BookType["author"];
@@ -10,14 +14,15 @@ type PurchaseInfoProps = {
 };
 
 const PurchaseInfo = ({ author, publisher, bookId }: PurchaseInfoProps) => {
-  const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: () => purchaseBook(bookId),
-    onSuccess: (res) => {
-      window.location.href = res.checkoutUrl;
-    },
-  });
+  const { isAuthenticated } = useContext(AuthCtx);
+  const navigate = useNavigate();
+
+  const { mutate, isPending } = usePurchaseBook({ bookId });
 
   const handleBuy = () => {
+    if (!isAuthenticated) {
+      navigate(ROUTES.AUTH.LOGIN);
+    }
     mutate();
   };
 
@@ -27,8 +32,8 @@ const PurchaseInfo = ({ author, publisher, bookId }: PurchaseInfoProps) => {
         <span>author : {author}</span>
         <span>publisher : {publisher}</span>
       </div>
-      <button className={S.buyButton} onClick={handleBuy}>
-        Buy
+      <button className={S.buyButton} onClick={handleBuy} disabled={isPending}>
+        {isPending ? <PuffLoader color="#fff" size={20} /> : "Buy"}
       </button>
     </div>
   );

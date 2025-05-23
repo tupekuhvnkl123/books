@@ -1,22 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
 import S from "./Book.module.scss";
 import Content from "./Content/Content";
 import PurchaseInfo from "./PurchaseInfo/PurchaseInfo";
-import { getBookById } from "../../api/Books";
 import { Link, useParams } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
-import Popup from "../UI/Popup/Popup";
 import { IoIosArrowBack } from "react-icons/io";
 import { ROUTES } from "../../routes/routePaths";
+import useGetBookById from "../../api/reactQueryHooks/useGetBookById";
 
 const Book = () => {
-  const { id } = useParams();
+  const { id = "" } = useParams();
 
-  const { isLoading, data, error, isError } = useQuery({
-    queryKey: [id],
-    queryFn: () => getBookById(id!),
-    enabled: !!id,
-  });
+  const { isLoading, data, isError } = useGetBookById({ id });
 
   if (isLoading) {
     return (
@@ -29,9 +23,8 @@ const Book = () => {
   if (isError || !data) {
     return (
       <div className={S.processContainer}>
-        {isError && <Popup error={error} />}
         <Link className={S.homeLink} to={ROUTES.HOME}>
-          חזרה לדף הבית
+          Return To Home Page
         </Link>
       </div>
     );
@@ -49,16 +42,13 @@ const Book = () => {
 
   return (
     <div className={S.container}>
-      {/* Book image */}
       <div className={S.imageContainer}>
         <img src={img} alt={"image"} />
         <Link to={ROUTES.HOME} className={S.returnButton}>
           <IoIosArrowBack size={20} />
         </Link>
       </div>
-      {/* Main content of the book */}
       <Content title={title} price={price} description={description} />
-      {/* Purchase */}
       <PurchaseInfo author={author} publisher={publisher} bookId={bookId} />
     </div>
   );

@@ -1,4 +1,4 @@
-import axios from "./axiosInstance";
+import axiosInstance from "./axiosInstance";
 
 export type RegisterFormData = {
   name: string;
@@ -12,11 +12,13 @@ export type LoginFormData = {
 };
 
 export const loginRequest = async (data: LoginFormData) => {
-  const response = await axios.post(`/auth/login`, data);
+  const response = await axiosInstance.post(`/auth/login`, data);
+
   return response.data;
 };
 
 export const registerRequest = async (data: RegisterFormData) => {
-  const response = await axios.post(`/auth/register`, data);
+  const response = await axiosInstance.post(`/auth/register`, data);
+
   return response.data;
 };

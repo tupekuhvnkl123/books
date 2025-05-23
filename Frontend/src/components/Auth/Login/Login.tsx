@@ -3,24 +3,19 @@ import S from "./Login.module.scss";
 import LoginForm from "./LoginForm";
 import { AuthCtx } from "../../../context/AuthCtx";
 import { useContext } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { LoginFormData, loginRequest } from "../../../api/Auth";
-import Popup from "../../UI/Popup/Popup";
+import { LoginFormData } from "../../../api/Auth";
 import { ROUTES } from "../../../routes/routePaths";
+import useLogin from "../../../api/reactQueryHooks/useLogin";
 
 const Login = () => {
   const { login } = useContext(AuthCtx);
 
-  const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: loginRequest,
-    onSuccess: ({ accessToken }) => {
-      login({ accessToken });
-    },
+  const { mutate, isPending } = useLogin({
+    callback: (accessToken) => login({ accessToken }),
   });
 
   return (
     <section className={S.container}>
-      {isError && <Popup error={error} />}
       <LoginForm
         login={(data: LoginFormData) => mutate(data)}
         isPending={isPending}

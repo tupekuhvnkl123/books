@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import S from "./BookActions.module.scss";
-import { ROUTES } from "../../../routes/routePaths";
-import { useMutation } from "@tanstack/react-query";
-import { deleteBook } from "../../../api/Admin";
-import Popup from "../../UI/Popup/Popup";
+import { getEditBookRoute } from "../../../routes/routePaths";
 import { PuffLoader } from "react-spinners";
+import useDeleteBook from "../../../api/reactQueryHooks/useDeleteBook";
 
 type BookActionsProps = {
   bookId: string;
@@ -14,20 +12,15 @@ type BookActionsProps = {
 const BookActions = ({ bookId, refetch }: BookActionsProps) => {
   const navigate = useNavigate();
 
-  const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: () => deleteBook(bookId),
-    onSuccess: () => {
-      if (refetch) {
-        refetch();
-      }
-    },
+  const { mutate, isPending } = useDeleteBook({
+    bookId,
+    callback: refetch,
   });
 
   const handleEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    const editRoute = `${ROUTES.ADMIN.NEW_BOOK}?editId=${bookId}`;
-    navigate(editRoute);
+    navigate(getEditBookRoute(bookId));
   };
 
   const handleDeleteClick = (e: React.MouseEvent) => {
@@ -38,7 +31,6 @@ const BookActions = ({ bookId, refetch }: BookActionsProps) => {
 
   return (
     <div className={S.container}>
-      {isError && <Popup error={error} />}
       <button className={S.editBtn} onClick={handleEditClick}>
         Edit
       </button>

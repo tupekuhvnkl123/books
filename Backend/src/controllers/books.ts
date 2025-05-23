@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import createHttpError from "http-errors";
-import { ReqAuth } from "../types/types";
 import User from "../models/user";
 import Book from "../models/book";
 import { createCheckoutSession } from "../services/stripe/checkout";
@@ -12,11 +11,8 @@ export const getBooks = async (
 ) => {
   try {
     const { search } = req.query;
-    const filter: Record<string, any> = {};
 
-    if (search) {
-      filter.title = { $regex: search, $options: "i" };
-    }
+    const filter = search ? { title: { $regex: search, $options: "i" } } : {};
 
     const books = await Book.find(filter).sort({ createdAt: -1 });
 
@@ -33,6 +29,7 @@ export const getBook = async (
 ) => {
   try {
     const { bookId } = req.params;
+
     const book = await Book.findById(bookId).populate("seller", "name");
 
     if (!book) throw createHttpError.NotFound("Couldn't find book.");
@@ -44,7 +41,7 @@ export const getBook = async (
 };
 
 export const getPurchasedBooks = async (
-  req: ReqAuth,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -61,7 +58,7 @@ export const getPurchasedBooks = async (
 };
 
 export const purchaseBook = async (
-  req: ReqAuth,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -70,9 +67,11 @@ export const purchaseBook = async (
     const { bookId } = req.params;
 
     const user = await User.findById(userId);
+
     if (!user || !userId) throw createHttpError.NotFound("User not found");
 
     const book = await Book.findById(bookId);
+
     if (!book) throw createHttpError.NotFound("Couldn't find book.");
 
     const checkoutSession = await createCheckoutSession(book);

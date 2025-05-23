@@ -1,12 +1,12 @@
 import Books from "./Books/Books";
 import Search from "./Search/Search";
 import S from "./Home.module.scss";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import Popup from "../UI/Popup/Popup";
-import { getBooks } from "../../api/Books";
 import { useSearchParams } from "react-router-dom";
 import { useRemoveQueryParam } from "../../hooks/useRemoveQueryParam";
+import useGetBooks from "../../api/reactQueryHooks/useGetBooks";
+import useDelayedCallback from "../../hooks/useDelayedCallback";
+import toast from "react-hot-toast";
 
 const orderSucceedMsg = "Thank you for your purchase at BookStore";
 
@@ -16,30 +16,29 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const removeQueryParam = useRemoveQueryParam();
 
-  const { isLoading, data, error, isError, refetch } = useQuery({
-    queryKey: ["books", { searchValue }],
-    queryFn: () => getBooks({ searchValue }),
+  const { isLoading, data, refetch } = useGetBooks({
+    searchValue,
   });
 
   const changeSearch = (val: string) => {
     setSearchValue(val);
   };
 
+  useDelayedCallback({
+    callback: () => removeQueryParam("order-succeed"),
+    timeout: 4000,
+    enabled: !!orderSucceed,
+  });
+
   useEffect(() => {
     if (orderSucceed) {
-      removeQueryParam("order-succeed", 4000); // remove after 4 seconds
+      toast.success(orderSucceedMsg);
     }
   }, [orderSucceed]);
 
   return (
     <section className={S.container}>
-      {isError && <Popup error={error} />}
-      {orderSucceed && <Popup type="success" msg={orderSucceedMsg} />}
-
-      {/* Search Bar */}
       <Search changeSearchValue={changeSearch} />
-
-      {/* Results */}
       <Books data={data} isLoading={isLoading} refetch={() => refetch()} />
     </section>
   );

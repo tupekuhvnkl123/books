@@ -6,7 +6,9 @@ import adminRoutes from "./admin";
 const router = Router();
 
 router.use("/auth", authRoutes);
+
 router.use("/admin", adminRoutes);
+
 router.use("/books", booksRoutes);
 
 export default router;

@@ -1,16 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { validationResult } from "express-validator";
 import createHttpError from "http-errors";
 import User from "../models/user";
 import { createToken } from "../services/jwt";
-
-const throwIfInvalid = (req: Request) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    throw createHttpError(400, errors.array()[0].msg);
-  }
-};
+import { throwValidationErr } from "../utils/errors";
 
 export const register = async (
   req: Request,
@@ -18,7 +11,7 @@ export const register = async (
   next: NextFunction
 ) => {
   try {
-    throwIfInvalid(req);
+    throwValidationErr(req);
 
     const { username, password, name } = req.body;
 
@@ -47,6 +40,7 @@ export const login = async (
     const { username, password } = req.body;
 
     const user = await User.findOne({ username: username.toLowerCase() });
+
     if (!user) {
       throw createHttpError.Unauthorized(
         "The username or password is incorrect, please try again"
@@ -54,6 +48,7 @@ export const login = async (
     }
 
     const passwordIsValid = await bcrypt.compare(password, user.password);
+
     if (!passwordIsValid) {
       throw createHttpError.Unauthorized(
         "The username or password is incorrect, please try again"

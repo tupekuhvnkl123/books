@@ -1,13 +1,11 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import createHttpError from "http-errors";
-import { NextFunction, Response } from "express";
-import { ReqAuth } from "../types/types";
+import { NextFunction, Request, Response } from "express";
+import { getDecodedToken } from "../services/jwt";
+
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_PRIVATE_KEY;
-
-export default async (req: ReqAuth, res: Response, next: NextFunction) => {
+const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader?.split(" ")[1];
@@ -16,13 +14,7 @@ export default async (req: ReqAuth, res: Response, next: NextFunction) => {
       throw createHttpError.Unauthorized("Authentication failed.");
     }
 
-    if (!JWT_SECRET) {
-      throw createHttpError.InternalServerError(
-        "JWT secret key not configured."
-      );
-    }
-
-    const decodedToken = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    const decodedToken = getDecodedToken(token);
 
     if (!decodedToken.user.id) {
       throw createHttpError.BadRequest("Invalid token format.");
@@ -31,8 +23,11 @@ export default async (req: ReqAuth, res: Response, next: NextFunction) => {
     const { id: userId, role } = decodedToken.user;
 
     req.user = { userId, role };
+
     next();
   } catch (err) {
     return next(err);
   }
 };
+
+export default checkAuth;
