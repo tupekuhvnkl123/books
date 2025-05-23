@@ -2,7 +2,7 @@ import { BookPreviewType } from "../../../types/Books.types";
 import S from "./BookItem.module.scss";
 import { Link } from "react-router-dom";
 import { PiCurrencyDollarSimple } from "react-icons/pi";
-import { getBookRoute, ROUTES } from "../../../routes/routePaths";
+import { getBookRoute } from "../../../routes/routePaths";
 import BookActions from "../../Admin/BookActions/BookActions";
 import PermissionGate from "../../HOC/PermissionGate";
 import { UserRole } from "../../../types/Users.types";
