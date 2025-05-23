@@ -50,25 +50,23 @@ export const updateMongoBook = async ({
   data,
 }: UpdateMongoBookParams) => {
   try {
-    const fieldsToUpdate = { ...data };
+    const updateFields = { ...data };
 
     if (data.img) {
       const imageUrl = await singleImageUpload({
         image: data.img,
         path: `${userId}/books`,
       });
-      fieldsToUpdate.img = imageUrl;
+      updateFields.img = imageUrl;
     }
 
     const updatedBook = await Book.findOneAndUpdate(
       { _id: bookId, seller: userId },
-      { $set: fieldsToUpdate },
+      { $set: updateFields },
       { new: true }
     );
 
-    if (!updatedBook) {
-      throw createHttpError(404, "Book not found");
-    }
+    if (!updatedBook) throw createHttpError(404, "Book not found");
 
     return updatedBook;
   } catch (err) {

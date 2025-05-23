@@ -18,8 +18,6 @@ export const singleImageUpload = async ({
 
     return uploadedImage.secure_url;
   } catch (err) {
-    console.log(err);
-
     throw err;
   }
 };

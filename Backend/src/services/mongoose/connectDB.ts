@@ -11,6 +11,11 @@ export const connectDB = async () => {
       throw new Error("MONGO_URI is not defined in environment variables.");
     }
 
+    if (mongoose.connection.readyState >= 1) {
+      console.log("MongoDB already connected.");
+      return;
+    }
+
     await mongoose.connect(MONGO_URI);
     console.log("Connected to Mongodb.");
   } catch (err) {

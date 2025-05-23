@@ -1,12 +1,8 @@
-import { BookSchemaType, BookType } from "../../types/book.types";
+import { BookSchemaType } from "../../types/book.types";
 import stripe from "./stripe";
 
 export const createCheckoutSession = (book: BookSchemaType) => {
-  const timestampInSeconds = Math.floor(Date.now() / 1000);
-  const fiveMinFromNow = timestampInSeconds + 30 * 60;
-
   return stripe.checkout.sessions.create({
-    // expires_at: fiveMinFromNow,
     payment_method_types: ["card", "amazon_pay"],
     line_items: [
       {
