@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
 import S from "./MainLayout.module.scss";
-import TopLoader from "../UI/TopLoader/TopLoader";
 import MobileMenu from "./Menu/MobileMenu/MobileMenu";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import DesktopMenu from "./Menu/DesktopMenu/DesktopMenu";
@@ -15,7 +14,6 @@ const MainLayout = () => {
 
   return (
     <main className={S.container}>
-      <TopLoader />
       {!authPage && (isMobile ? !bookPage && <MobileMenu /> : <DesktopMenu />)}
       <Outlet />
       <Toaster />
