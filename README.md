@@ -3,6 +3,7 @@ You can access the live application here:
 
 - **Client** is deployed on [Vercel](https://vercel.com/)
 - **Server** is deployed on [Render](https://render.com/)
+⚠️ Note: The server may take a few moments to start up if it's been idle, as it's hosted on Render's free tier which pauses the server when not in use.
 
 ## Features
 
