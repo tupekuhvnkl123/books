@@ -11,13 +11,7 @@ const errorHandler = (
   const message =
     err instanceof HttpError ? err.message : "An unknown error occurred!";
 
-  res.status(status);
-  res.send({
-    error: {
-      status,
-      message,
-    },
-  });
+  res.status(status).json({ error: { status, message } });
 };
 
 export default errorHandler;
